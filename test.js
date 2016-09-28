@@ -1,3 +1,4 @@
+const fs = require('fs');
 const receipt = require('./src/receipt');
 
 const output = receipt.create([
@@ -18,7 +19,27 @@ const output = receipt.create([
 		{ item: 'Product 5', qty: 14, cost: 8515 },
 		{ item: 'Product 6', qty: 3, cost: 500 },
 		{ item: 'Product 7', qty: 7, cost: 1275 }
-	] }
+	] },
+	{ type: 'empty' },
+	{ type: 'center', value: 'Some extra information to' },
+	{ type: 'center', value: 'add to the footer of this' },
+	{ type: 'center', value: 'docket.' },
+	{ type: 'empty' },
+	{ type: 'properties', lines: [
+		{ name: 'GST (10.00%)', value: 'AUD XX.XX' },
+		{ name: 'Total amount (excl. GST)', value: 'AUD XX.XX' },
+		{ name: 'Total amount (incl. GST)', value: 'AUD XX.XX' }
+	] },
+	{ type: 'empty' },
+	{ type: 'properties', lines: [
+		{ name: 'Amount Received', value: 'AUD XX.XX' },
+		{ name: 'Amount Returned', value: 'AUD XX.XX' }
+	] },
+	{ type: 'empty' },
+	{ type: 'center', value: 'Final bits of text at the very' },
+	{ type: 'center', value: 'base of the docket.' }
 ]);
 
-console.log(output);
+fs.writeFile('./example.txt', output, (err) => {
+	console.log(output);
+});

@@ -25,7 +25,13 @@ module.exports = (() => {
 			},
 
 			properties(chunk, width) {
-				return chunk.lines.map((line) => utils.pad(line.name + ':', ' ', 16) + line.value).join(EOL);
+				let widest = 0;
+
+				for (let line of chunk.lines) {
+					widest = Math.max(line.name.length, widest);
+				}
+
+				return chunk.lines.map((line) => utils.pad(line.name + ':', ' ', widest + 5) + line.value).join(EOL);
 			},
 
 			table(chunk, width) {

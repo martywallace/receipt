@@ -4,32 +4,32 @@ const utils = require('./utils');
 module.exports = (() => {
 	return {
 		formatters: {
-			empty: (chunk, width) => {
+			empty(chunk, width) {
 				return '';
 			},
 
-			ruler: (chunk, width) => {
-				return utils.pad('', '-', width, utils.PAD_RIGHT)
+			ruler(chunk, width) {
+				return utils.pad('', '-', width, utils.PAD_RIGHT);
 			},
 			
-			left: (chunk, width) => {
-				return this;
+			left(chunk, width) {
+				return chunk.value;
 			},
 
-			right: (chunk, width) => {
-				return utils.pad(chunk, ' ', width, utils.PAD_LEFT);
+			right(chunk, width) {
+				return utils.pad(chunk.value, ' ', width, utils.PAD_LEFT);
 			},
 
-			center: (chunk, width) => {
-				return utils.pad(chunk, ' ', width, utils.PAD_BOTH);
+			center(chunk, width) {
+				return utils.pad(chunk.value, ' ', width, utils.PAD_BOTH);
 			},
 
-			properties: (chunk, width) => {
+			properties(chunk, width) {
 				return chunk.lines.map((line) => utils.pad(line.name + ':', ' ', 16) + line.value).join(EOL);
 			},
 
-			table: (chunk, width) => {
-				let lines = [utils.pad('', '-', width, utils.PAD_RIGHT)];
+			table(chunk, width) {
+				let lines = [this.ruler('', width)];
 
 				let headers = [
 					'Qty',
@@ -39,7 +39,7 @@ module.exports = (() => {
 				].join('');
 
 				lines.push(utils.pad('Product', ' ', width - headers.length) + headers);
-				lines.push(utils.pad('', '-', width, utils.PAD_RIGHT));
+				lines.push(this.ruler('', width));
 
 				for (let line of chunk.lines) {
 					let summary = [
@@ -52,50 +52,16 @@ module.exports = (() => {
 					lines.push(utils.pad(line.item, ' ', width - summary.length) + summary);
 				}
 
-				lines.push(utils.pad('', '-', width, utils.PAD_RIGHT));
+				lines.push(this.ruler('', width));
 
 				return lines.join(EOL);
 			}
 		},
 
-		write(chunks, width = 50) {
+		create(chunks, width = 50) {
 			return chunks.map((chunk) => {
 				if (chunk.hasOwnProperty('type')) {
-					if (chunk.type === this.types.EMPTY) {
-						if (chunk.hasOwnProperty('height')) {
-							let lines = [];
-
-							for (let i = 0; i < chunk.height; i++) {
-								lines.push(EOL);
-							}
-
-							return lines.join('');
-						} else {
-							return EOL;
-						}
-					} 
-
-					else if (chunk.type === this.types.RULER) {
-						return utils.pad('', '-', width, utils.PAD_RIGHT);
-					}
-
-					else if (chunk.type === this.types.PROPERTIES) {
-						
-					}
-
-					else if (chunk.type === this.types.TABLE) {
-						if (chunk.hasOwnProperty('lines')) {
-							
-						}
-					}
-
-					else {
-						if (chunk.hasOwnProperty('value')) {
-							if (chunk.type === this.types.GENERAL_LEFT) return utils.pad(chunk.value, ' ', width, utils.PAD_RIGHT);
-							if (chunk.type === this.types.GENERAL_RIGHT) return utils.pad(chunk.value, ' ', width, utils.PAD_LEFT);
-							if (chunk.type === this.types.GENERAL_CENTER) return utils.pad(chunk.value, ' ', width, utils.PAD_BOTH);
-						}
-					}
+					return this.formatters[chunk.type](chunk, width);
 				}
 
 				return '';

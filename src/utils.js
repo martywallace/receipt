@@ -21,6 +21,10 @@ module.exports = (() => {
 			}
 
 			return value;
+		},
+
+		money(cents) {
+			return (cents / 100).toFixed(2);
 		}
 	};
 })();

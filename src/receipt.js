@@ -50,9 +50,9 @@ module.exports = (() => {
 				for (let line of chunk.lines) {
 					let summary = [
 						line.qty + 'x',
-						utils.pad('$' + (line.cost / 100).toFixed(2), ' ', 10, utils.PAD_LEFT),
-						utils.pad('$' + (line.cost / 1000).toFixed(2), ' ', 9, utils.PAD_LEFT),
-						utils.pad('$' + (line.qty * (line.cost / 100)).toFixed(2), ' ', 10, utils.PAD_LEFT)
+						utils.pad('$' + utils.money(line.cost), ' ', 10, utils.PAD_LEFT),
+						utils.pad('$' + utils.money(line.cost * 0.1), ' ', 9, utils.PAD_LEFT),
+						utils.pad('$' + utils.money(line.qty * line.cost), ' ', 10, utils.PAD_LEFT)
 					].join('');
 
 					lines.push(utils.pad(line.item, ' ', width - summary.length) + summary);

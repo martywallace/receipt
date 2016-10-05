@@ -30,7 +30,7 @@ module.exports = (() => {
 		},
 
 		money(cents) {
-			return roundTo(cents / 100, 2);
+			return roundTo(cents / 100, 2).toFixed(2);
 		}
 	};
 })();

@@ -1,3 +1,7 @@
+'use strict';
+
+const roundTo = require('round-to');
+
 module.exports = (() => {
 	return {
 		PAD_LEFT: 'left',
@@ -24,7 +28,7 @@ module.exports = (() => {
 		},
 
 		money(cents) {
-			return (cents / 100).toFixed(2);
+			return roundTo(cents / 100, 2);
 		}
 	};
 })();

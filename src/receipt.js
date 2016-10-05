@@ -1,3 +1,5 @@
+'use strict';
+
 const EOL = require('os').EOL;
 const utils = require('./utils');
 
@@ -5,7 +7,7 @@ module.exports = (() => {
 	return {
 		formatters: {
 			empty(chunk, width) {
-				return '';
+				return utils.pad('', ' ', width, utils.PAD_RIGHT);
 			},
 
 			ruler(chunk, width) {

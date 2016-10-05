@@ -1,12 +1,11 @@
 # Receipt.
 
-Generate receipt-like output in NodeJS.
+Generate receipt-like output.
 
 ## Example:
 
 ```
-const fs = require('fs');
-const receipt = require('./src/receipt');
+const receipt = require('receipt');
 
 const output = receipt.create([
 	{ type: 'center', value: 'MY AWESOME STORE' },
@@ -47,44 +46,42 @@ const output = receipt.create([
 	{ type: 'center', value: 'base of the docket.' }
 ]);
 
-fs.writeFile('./example.txt', output, (err) => {
-	console.log(output);
-});
+console.log(output);
 ```
 
 Which generates:
 
 ```
-                 MY AWESOME STORE
-                   123 STORE ST
-                  store@store.com
-                   www.store.com
-
+                 MY AWESOME STORE                 
+                   123 STORE ST                   
+                  store@store.com                 
+                   www.store.com                  
+                                                  
 Order Number:    XXXXXXXXXXXX
 Date:            XX/XX/XXXX XX:XX
 --------------------------------------------------
 Product           Qty    Unit $      GST       Amt
 --------------------------------------------------
-Product 1          1x    $10.00    $1.00    $10.00
-Product 2          1x   $175.00   $17.50   $175.00
-Product 3          2x     $9.00    $0.90    $18.00
-Product 4          1x     $0.80    $0.08     $0.80
-Product 5         14x    $85.15    $8.52  $1192.10
-Product 6          3x     $5.00    $0.50    $15.00
-Product 7          7x    $12.75    $1.27    $89.25
+Product 1          1x       $10       $1       $10
+Product 2          1x      $175    $17.5      $175
+Product 3          2x        $9     $0.9       $18
+Product 4          1x      $0.8    $0.08      $0.8
+Product 5         14x    $85.16    $8.52  $1192.24
+Product 6          3x        $5     $0.5       $15
+Product 7          7x    $12.75    $1.28    $89.25
 --------------------------------------------------
-
-             Some extra information to
-             add to the footer of this
-                      docket.
-
+                                                  
+             Some extra information to            
+             add to the footer of this            
+                      docket.                     
+                                                  
 GST (10.00%):                AUD XX.XX
 Total amount (excl. GST):    AUD XX.XX
 Total amount (incl. GST):    AUD XX.XX
-
+                                                  
 Amount Received:    AUD XX.XX
 Amount Returned:    AUD XX.XX
-
-          Final bits of text at the very
-                base of the docket.
+                                                  
+          Final bits of text at the very          
+                base of the docket.               
 ```

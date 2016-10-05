@@ -1,10 +1,13 @@
 {
-	"name": "receipt",
-	"version": "1.0.0",
-	"author": {
-		"name": "Marty Wallace",
-		"email": "marty@martywallace.com",
-		"homepage": "https://martywallace.com"
-	},
-	"main": "index.js"
+  "name": "receipt",
+  "version": "1.0.1",
+  "author": {
+    "name": "Marty Wallace",
+    "email": "marty@martywallace.com",
+    "homepage": "https://martywallace.com"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "round-to": "^1.1.0"
+  }
 }

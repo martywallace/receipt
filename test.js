@@ -1,3 +1,5 @@
+'use strict';
+
 const fs = require('fs');
 const receipt = require('./src/receipt');
 

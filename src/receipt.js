@@ -66,7 +66,9 @@ module.exports = (() => {
 			}
 		},
 
-		create(chunks, width = 50) {
+		create(chunks, width) {
+			width = typeof width === 'undefined' ? 50 : width;
+
 			return chunks.map((chunk) => {
 				if (chunk.hasOwnProperty('type')) {
 					return this.formatters[chunk.type](chunk, width);

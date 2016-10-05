@@ -8,7 +8,9 @@ module.exports = (() => {
 		PAD_RIGHT: 'right',
 		PAD_BOTH: 'both',
 
-		pad(value, char, length, side = 'right') {
+		pad(value, char, length, side) {
+			side = typeof side === 'undefined' ? 'right' : side;
+
 			let padding = '';
 			let required = Math.floor(length) - value.length;
 

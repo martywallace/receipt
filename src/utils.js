@@ -12,7 +12,7 @@ module.exports = (() => {
 			side = typeof side === 'undefined' ? 'right' : side;
 
 			let padding = '';
-			let required = Math.floor(length) - value.length;
+			let required = Math.floor(length) - value.toString().length;
 
 			while (required > 0) {
 				required -= 1;

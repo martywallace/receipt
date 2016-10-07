@@ -15,7 +15,7 @@ const output = receipt.create([
 	] },
 	{ type: 'table', lines: [
 		{ item: 'Product 1', qty: 1, cost: 1000 },
-		{ item: 'Product 2', qty: 1, cost: 17500 },
+		{ item: 'Product 2 With A Really Long Name', qty: 1, cost: 17500 },
 		{ item: 'Product 3', qty: 2, cost: 900 },
 		{ item: 'Product 4', qty: 1, cost: 80 },
 		{ item: 'Product 5', qty: 14, cost: 8516 },

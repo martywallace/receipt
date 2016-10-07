@@ -41,9 +41,9 @@ module.exports = (() => {
 
 				let headers = [
 					'Qty',
-					utils.pad('Unit $', ' ', 10, utils.PAD_LEFT),
-					utils.pad('GST', ' ', 9, utils.PAD_LEFT),
-					utils.pad('Amt', ' ', 10, utils.PAD_LEFT)
+					// utils.pad('Unit $', ' ', 10, utils.PAD_LEFT),
+					// utils.pad('GST', ' ', 9, utils.PAD_LEFT),
+					utils.pad('Amt', ' ', 14, utils.PAD_LEFT)
 				].join('');
 
 				lines.push(utils.pad('Product', ' ', width - headers.length) + headers);
@@ -52,12 +52,18 @@ module.exports = (() => {
 				for (let line of chunk.lines) {
 					let summary = [
 						line.qty + 'x',
-						utils.pad('$' + utils.money(line.cost), ' ', 10, utils.PAD_LEFT),
-						utils.pad('$' + utils.money(line.cost * 0.1), ' ', 9, utils.PAD_LEFT),
-						utils.pad('$' + utils.money(line.qty * line.cost), ' ', 10, utils.PAD_LEFT)
+						// utils.pad('$' + utils.money(line.cost), ' ', 10, utils.PAD_LEFT),
+						// utils.pad('$' + utils.money(line.cost * 0.1), ' ', 9, utils.PAD_LEFT),
+						utils.pad('$' + utils.money(line.qty * line.cost), ' ', 14, utils.PAD_LEFT)
 					].join('');
 
-					lines.push(utils.pad(line.item, ' ', width - summary.length) + summary);
+					let name = line.item;
+
+					if (name.length > width - summary.length - 4) {
+						name = name.substr(0, width - summary.length - 7).replace(/\s+$/, '') + '...';
+					}
+
+					lines.push(utils.pad(name, ' ', width - summary.length) + summary);
 				}
 
 				lines.push(this.ruler('', width));
@@ -67,7 +73,7 @@ module.exports = (() => {
 		},
 
 		create(chunks, width) {
-			width = typeof width === 'undefined' ? 50 : width;
+			width = typeof width === 'undefined' ? 48 : width;
 
 			return chunks.map((chunk) => {
 				if (chunk.hasOwnProperty('type')) {

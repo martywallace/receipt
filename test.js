@@ -40,7 +40,7 @@ const output = receipt.create([
 	{ type: 'empty' },
 	{ type: 'center', value: 'Final bits of text at the very' },
 	{ type: 'center', value: 'base of the docket.' }
-]);
+], { currency: '£', width: 100});
 
 fs.writeFile('./example.txt', output, (err) => {
 	console.log(output);

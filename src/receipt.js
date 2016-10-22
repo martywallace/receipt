@@ -52,6 +52,7 @@ module.exports = (() => {
 
 					if (line.hasOwnProperty('discount')) {
 						if (line.discount.type === 'percentage') total *= (1 - line.discount.value);
+						else if (line.discount.type === 'message') total;
 						else total -= line.discount.value;
 					}
 
@@ -62,7 +63,10 @@ module.exports = (() => {
 					].join(''));
 
 					if (line.hasOwnProperty('discount')) {
-						let discountText = '-' + (line.discount.type === 'percentage' ? (line.discount.value * 100) + '%' : currency + utils.money(line.discount.value));
+						let discountText = '-'
+						if (line.discount.type === 'percentage') discountText += (line.discount.value * 100) + '%';
+						else if (line.discount.type === 'message') discountText = line.discount.value;
+						else discountText += currency + utils.money(line.discount.value);
 
 						lines.push([
 							utils.pad('', ' ', 6, utils.PAD_RIGHT),

@@ -18,6 +18,7 @@ const output = receipt.create([
 		{ item: 'Product 2 with a really long name', qty: 1, cost: 17500, discount: { type: 'absolute', value: 1000 } },
 		{ item: 'Another product wth quite a name', qty: 2, cost: 900 },
 		{ item: 'Product 4', qty: 1, cost: 80, discount: { type: 'percentage', value: 0.15 } },
+		{ item: 'Product with discount message', qty: 3, cost: 80, discount: { type: 'message', value: '3 for 2 discount' } },
 		{ item: 'This length is ridiculohusly lengthy', qty: 14, cost: 8516 },
 		{ item: 'Product 6', qty: 3, cost: 500 },
 		{ item: 'Product 7', qty: 7, cost: 1275 }

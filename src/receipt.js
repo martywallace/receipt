@@ -6,27 +6,27 @@ const utils = require('./utils');
 module.exports = (() => {
 	return {
 		formatters: {
-			empty(chunk, width) {
+			empty(chunk, { width }) {
 				return utils.pad('', ' ', width, utils.PAD_RIGHT);
 			},
 
-			ruler(chunk, width) {
+			ruler(chunk, { width }) {
 				return utils.pad('', '=', width, utils.PAD_RIGHT);
 			},
-			
-			left(chunk, width) {
+
+			left(chunk, { width }) {
 				return chunk.value;
 			},
 
-			right(chunk, width) {
+			right(chunk, { width }) {
 				return utils.pad(chunk.value, ' ', width, utils.PAD_LEFT);
 			},
 
-			center(chunk, width) {
+			center(chunk, { width }) {
 				return utils.pad(chunk.value, ' ', width, utils.PAD_BOTH);
 			},
 
-			properties(chunk, width) {
+			properties(chunk, { width }) {
 				let widest = 0;
 
 				for (let line of chunk.lines) {
@@ -36,8 +36,8 @@ module.exports = (() => {
 				return chunk.lines.map((line) => utils.pad(line.name + ':', ' ', widest + 5) + line.value).join(EOL);
 			},
 
-			table(chunk, width) {
-				let lines = [this.ruler('', width)];
+			table(chunk, { width, currency }) {
+				let lines = [this.ruler('', { width })];
 
 				lines.push([
 					utils.pad('Qty', ' ', 6, utils.PAD_RIGHT),
@@ -45,7 +45,7 @@ module.exports = (() => {
 					utils.pad('Total', ' ', 12, utils.PAD_LEFT)
 				].join(''));
 
-				lines.push(this.ruler('', width));
+				lines.push(this.ruler('', { width }));
 
 				for (let line of chunk.lines) {
 					let total = line.qty * line.cost;
@@ -58,11 +58,11 @@ module.exports = (() => {
 					lines.push([
 						utils.pad(line.qty, ' ', 6, utils.PAD_RIGHT),
 						utils.pad(line.item.substr(0, width - 18), ' ', width - 18, utils.PAD_RIGHT),
-						utils.pad('$' + utils.money(total), ' ', 12, utils.PAD_LEFT)
+						utils.pad(currency + utils.money(total), ' ', 12, utils.PAD_LEFT)
 					].join(''));
 
 					if (line.hasOwnProperty('discount')) {
-						let discountText = '-' + (line.discount.type === 'percentage' ? (line.discount.value * 100) + '%' : '$' + utils.money(line.discount.value));
+						let discountText = '-' + (line.discount.type === 'percentage' ? (line.discount.value * 100) + '%' : currency + utils.money(line.discount.value));
 
 						lines.push([
 							utils.pad('', ' ', 6, utils.PAD_RIGHT),
@@ -71,18 +71,17 @@ module.exports = (() => {
 					}
 				}
 
-				lines.push(this.ruler('', width));
+				lines.push(this.ruler('', { width }));
 
 				return lines.join(EOL);
 			}
 		},
 
-		create(chunks, width) {
-			width = typeof width === 'undefined' ? 48 : width;
+		create(chunks, { width = 48, currency = '$' } = {}) {
 
 			return chunks.map((chunk) => {
 				if (chunk.hasOwnProperty('type')) {
-					return this.formatters[chunk.type](chunk, width);
+					return this.formatters[chunk.type](chunk, { width, currency });
 				}
 
 				return '';

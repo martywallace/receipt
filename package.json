@@ -1,6 +1,9 @@
 {
   "name": "receipt",
   "version": "1.2.0",
+  "description": "Generate receipt-like output.",
+  "keywords": ["pos", "receipt", "kiosk", "printing", "formatting", "text", "currency"],
+  "license": "MIT",
   "author": {
     "name": "Marty Wallace",
     "email": "marty@martywallace.com",

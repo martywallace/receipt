@@ -1,6 +1,17 @@
 # Receipt.
 
-Generate receipt-like output.
+Generate receipt-like output for printing in a kiosk, POS system, etc.
+
+## Configuration.
+
+Some aspects of the output can be configured via the `config` property:
+
+```
+const receipt = require('receipt');
+
+receipt.config.currency = '$'; // The currency symbol to use in output.
+receipt.config.width = 50;     // The amount of characters used to give the output a "width".
+```
 
 ## Example:
 

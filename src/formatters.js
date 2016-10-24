@@ -66,7 +66,7 @@ module.exports = {
 
 				lines.push([
 					utils.pad('', ' ', 6, utils.PAD_RIGHT),
-					utils.pad(discountText, ' ', this.config.width - 30, utils.PAD_RIGHT)
+					discountText
 				].join(''));
 			}
 		}

@@ -79,14 +79,14 @@ Qty   Product                                          Total
 ============================================================
 1     Product 1                                       £10.00
 1     Product 2 with a really long name              £165.00
-        (Item Disc. -£10.00)        
+        (Item Disc. -£10.00)
 2     Another product wth quite a name                £18.00
 1     Product 4                                        £0.68
-        (Item Disc. -15%)           
+        (Item Disc. -15%)
 14    This length is ridiculously lengthy           £1192.24
 3     Product 6                                       £15.00
 3     Product 7                                       £10.00
-        (3 for the price of 2)      
+        (3 for the price of 2)
 ============================================================
                                                             
                   Some extra information to                 

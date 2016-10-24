@@ -4,6 +4,8 @@ const fs = require('fs');
 const receipt = require('./src/receipt');
 
 receipt.config.currency = '£';
+receipt.config.width = 60;
+receipt.config.ruler = '-';
 
 const output = receipt.create([
 	{ type: 'center', value: 'MY AWESOME STORE' },
@@ -22,7 +24,7 @@ const output = receipt.create([
 		{ item: 'Product 4', qty: 1, cost: 80, discount: { type: 'percentage', value: 0.15 } },
 		{ item: 'This length is ridiculously lengthy', qty: 14, cost: 8516 },
 		{ item: 'Product 6', qty: 3, cost: 500 },
-		{ item: 'Product 7', qty: 7, cost: 1275 }
+		{ item: 'Product 7', qty: 3, cost: 500, discount: { type: 'absolute', value: 500, message: '3 for the price of 2' } }
 	] },
 	{ type: 'empty' },
 	{ type: 'center', value: 'Some extra information to' },

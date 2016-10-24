@@ -60,11 +60,13 @@ module.exports = {
 			].join(''));
 
 			if (line.hasOwnProperty('discount')) {
-				let discountText = '-' + (line.discount.type === 'percentage' ? (line.discount.value * 100) + '%' : this.config.currency + utils.money(line.discount.value));
+				let discountText =  line.discount.hasOwnProperty('message')
+					? '  (' + line.discount.message + ')'
+					: '  (Item Disc. -' + (line.discount.type === 'percentage' ? (line.discount.value * 100) + '%' : this.config.currency + utils.money(line.discount.value)) + ')';
 
 				lines.push([
 					utils.pad('', ' ', 6, utils.PAD_RIGHT),
-					utils.pad('  (Item Disc. ' + discountText + ')', ' ', this.config.width - 30, utils.PAD_RIGHT)
+					utils.pad(discountText, ' ', this.config.width - 30, utils.PAD_RIGHT)
 				].join(''));
 			}
 		}

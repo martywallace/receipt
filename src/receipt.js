@@ -6,7 +6,8 @@ const formatters = require('./formatters');
 const receipt = {
 	config: {
 		currency: '$',
-		width: 50
+		width: 50,
+		ruler: '='
 	},
 
 	formatters: { },

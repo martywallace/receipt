@@ -1,0 +1,110 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@3.10.3
+3 info using node@v6.4.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/marty/Projects/Receipt',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/marty/.npm/receipt/1.3.0/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/marty/.npm correctMkdir not in flight; initializing
+10 info lifecycle receipt@1.3.0~prepublish: receipt@1.3.0
+11 silly lifecycle receipt@1.3.0~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/Users/marty/.npm/receipt/1.3.0/package.tgz',
+12 verbose tar pack   '/Users/marty/Projects/Receipt' ]
+13 verbose tarball /Users/marty/.npm/receipt/1.3.0/package.tgz
+14 verbose folder /Users/marty/Projects/Receipt
+15 verbose addLocalTarball adding from inside cache /Users/marty/.npm/receipt/1.3.0/package.tgz
+16 verbose correctMkdir /Users/marty/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd receipt@1.3.0
+18 verbose afterAdd /Users/marty/.npm/receipt/1.3.0/package/package.json not in flight; writing
+19 verbose correctMkdir /Users/marty/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /Users/marty/.npm/receipt/1.3.0/package/package.json written
+21 silly publish { name: 'receipt',
+21 silly publish   version: '1.3.0',
+21 silly publish   description: 'Generate receipt-like output.',
+21 silly publish   keywords:
+21 silly publish    [ 'pos',
+21 silly publish      'receipt',
+21 silly publish      'kiosk',
+21 silly publish      'printing',
+21 silly publish      'formatting',
+21 silly publish      'text',
+21 silly publish      'currency' ],
+21 silly publish   license: 'MIT',
+21 silly publish   author: { name: 'Marty Wallace', email: 'marty@martywallace.com' },
+21 silly publish   main: 'index.js',
+21 silly publish   dependencies: { 'round-to': '^1.1.0' },
+21 silly publish   readme: '# Receipt.\n\nGenerate receipt-like output for printing in a kiosk, POS system, etc.\n\n## Configuration.\n\nSome aspects of the output can be configured via the `config` property:\n\n```\nconst receipt = require(\'receipt\');\n\nreceipt.config.currency = \'$\'; // The currency symbol to use in output.\nreceipt.config.width = 50;     // The amount of characters used to give the output a "width".\nreceipt.config.ruler = \'=\';    // The character used for ruler output.\n```\n\n## Example:\n\n```\nconst receipt = require(\'receipt\');\n\nreceipt.config.currency = \'£\';\nreceipt.config.width = 60;\nreceipt.config.ruler = \'-\';\n\nconst output = receipt.create([\n\t{ type: \'center\', value: \'MY AWESOME STORE\' },\n\t{ type: \'center\', value: \'123 STORE ST\' },\n\t{ type: \'center\', value: \'store@store.com\' },\n\t{ type: \'center\', value: \'www.store.com\' },\n\t{ type: \'empty\' },\n\t{ type: \'properties\', lines: [\n\t\t{ name: \'Order Number\', value: \'XXXXXXXXXXXX\' },\n\t\t{ name: \'Date\', value: \'XX/XX/XXXX XX:XX\' }\n\t] },\n\t{ type: \'table\', lines: [\n\t\t{ item: \'Product 1\', qty: 1, cost: 1000 },\n\t\t{ item: \'Product 2 with a really long name\', qty: 1, cost: 17500, discount: { type: \'absolute\', value: 1000 } },\n\t\t{ item: \'Another product wth quite a name\', qty: 2, cost: 900 },\n\t\t{ item: \'Product 4\', qty: 1, cost: 80, discount: { type: \'percentage\', value: 0.15 } },\n\t\t{ item: \'This length is ridiculously lengthy\', qty: 14, cost: 8516 },\n\t\t{ item: \'Product 6\', qty: 3, cost: 500 },\n\t\t{ item: \'Product 7\', qty: 3, cost: 500, discount: { type: \'absolute\', value: 500, message: \'3 for the price of 2\' } }\n\t] },\n\t{ type: \'empty\' },\n\t{ type: \'center\', value: \'Some extra information to\' },\n\t{ type: \'center\', value: \'add to the footer of this\' },\n\t{ type: \'center\', value: \'docket.\' },\n\t{ type: \'empty\' },\n\t{ type: \'properties\', lines: [\n\t\t{ name: \'GST (10.00%)\', value: \'AUD XX.XX\' },\n\t\t{ name: \'Total amount (excl. GST)\', value: \'AUD XX.XX\' },\n\t\t{ name: \'Total amount (incl. GST)\', value: \'AUD XX.XX\' }\n\t] },\n\t{ type: \'empty\' },\n\t{ type: \'properties\', lines: [\n\t\t{ name: \'Amount Received\', value: \'AUD XX.XX\' },\n\t\t{ name: \'Amount Returned\', value: \'AUD XX.XX\' }\n\t] },\n\t{ type: \'empty\' },\n\t{ type: \'center\', value: \'Final bits of text at the very\' },\n\t{ type: \'center\', value: \'base of the docket.\' }\n]);\n\nconsole.log(output);\n```\n\nWhich generates:\n\n```\n                      MY AWESOME STORE                      \n                        123 STORE ST                        \n                       store@store.com                      \n                        www.store.com                       \n                                                            \nOrder Number:    XXXXXXXXXXXX\nDate:            XX/XX/XXXX XX:XX\n------------------------------------------------------------\nQty   Product                                          Total\n------------------------------------------------------------\n1     Product 1                                       £10.00\n1     Product 2 with a really long name              £165.00\n        (Item Disc. -£10.00)\n2     Another product wth quite a name                £18.00\n1     Product 4                                        £0.68\n        (Item Disc. -15%)\n14    This length is ridiculously lengthy           £1192.24\n3     Product 6                                       £15.00\n3     Product 7                                       £10.00\n        (3 for the price of 2)\n------------------------------------------------------------\n                                                            \n                  Some extra information to                 \n                  add to the footer of this                 \n                           docket.                          \n                                                            \nGST (10.00%):                AUD XX.XX\nTotal amount (excl. GST):    AUD XX.XX\nTotal amount (incl. GST):    AUD XX.XX\n                                                            \nAmount Received:    AUD XX.XX\nAmount Returned:    AUD XX.XX\n                                                            \n               Final bits of text at the very               \n                     base of the docket.                    \n```',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: '5d72d72ebc6cdab22aee01793ffa81670984ee7c',
+21 silly publish   _id: 'receipt@1.3.0',
+21 silly publish   scripts: {},
+21 silly publish   _shasum: 'ab78d3ebe2e3d059c44df98391eff86b5fd8553a',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name receipt
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'receipt',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'receipt',
+26 silly mapToRegistry   name: 'receipt',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/receipt
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading /Users/marty/.npm/receipt/1.3.0/package.tgz
+30 verbose request uri https://registry.npmjs.org/receipt
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 10:17:46 AM
+33 verbose request using bearer token for auth
+34 verbose request id 6f25d1334a7e0ae3
+35 http request PUT https://registry.npmjs.org/receipt
+36 http 403 https://registry.npmjs.org/receipt
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '95',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Mon, 24 Oct 2016 23:17:47 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'x-served-by': 'cache-syd1623-SYD',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1477351066.835432,VS0,VE664',
+37 verbose headers   vary: 'Accept-Encoding' }
+38 verbose request invalidating /Users/marty/.npm/registry.npmjs.org/receipt on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: "You cannot publish over the previously published version 1.3.0." : receipt
+40 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+40 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+40 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:200:22)
+40 verbose stack     at emitTwo (events.js:106:13)
+40 verbose stack     at Request.emit (events.js:191:7)
+40 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1067:10)
+40 verbose stack     at emitOne (events.js:101:20)
+40 verbose stack     at Request.emit (events.js:188:7)
+40 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:988:12)
+41 verbose statusCode 403
+42 verbose pkgid receipt
+43 verbose cwd /Users/marty/Projects/Receipt
+44 error Darwin 16.0.0
+45 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+46 error node v6.4.0
+47 error npm  v3.10.3
+48 error code E403
+49 error "You cannot publish over the previously published version 1.3.0." : receipt
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]

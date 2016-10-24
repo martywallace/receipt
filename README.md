@@ -11,6 +11,7 @@ const receipt = require('receipt');
 
 receipt.config.currency = '$'; // The currency symbol to use in output.
 receipt.config.width = 50;     // The amount of characters used to give the output a "width".
+receipt.config.ruler = '=';    // The character used for ruler output.
 ```
 
 ## Example:
@@ -74,9 +75,9 @@ Which generates:
                                                             
 Order Number:    XXXXXXXXXXXX
 Date:            XX/XX/XXXX XX:XX
-============================================================
+------------------------------------------------------------
 Qty   Product                                          Total
-============================================================
+------------------------------------------------------------
 1     Product 1                                       £10.00
 1     Product 2 with a really long name              £165.00
         (Item Disc. -£10.00)
@@ -87,7 +88,7 @@ Qty   Product                                          Total
 3     Product 6                                       £15.00
 3     Product 7                                       £10.00
         (3 for the price of 2)
-============================================================
+------------------------------------------------------------
                                                             
                   Some extra information to                 
                   add to the footer of this                 

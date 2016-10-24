@@ -9,7 +9,7 @@ module.exports = {
 	},
 
 	ruler(chunk) {
-		return utils.pad('', '=', this.config.width, utils.PAD_RIGHT);
+		return utils.pad('', this.config.ruler, this.config.width, utils.PAD_RIGHT);
 	},
 
 	left(chunk) {

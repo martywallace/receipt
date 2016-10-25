@@ -40,9 +40,7 @@ const receipt = {
 receipt.addFormatters({
 	empty: formatters.empty,
 	ruler: formatters.ruler,
-	left: formatters.left,
-	right: formatters.right,
-	center: formatters.center,
+	text: formatters.text,
 	properties: formatters.properties,
 	table: formatters.table
 });

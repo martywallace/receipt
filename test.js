@@ -4,14 +4,16 @@ const fs = require('fs');
 const receipt = require('./src/receipt');
 
 receipt.config.currency = '£';
-receipt.config.width = 60;
+receipt.config.width = 50;
 receipt.config.ruler = '-';
 
 const output = receipt.create([
-	{ type: 'center', value: 'MY AWESOME STORE' },
-	{ type: 'center', value: '123 STORE ST' },
-	{ type: 'center', value: 'store@store.com' },
-	{ type: 'center', value: 'www.store.com' },
+	{ type: 'text', value: [
+		'MY AWESOME STORE',
+		'123 STORE ST',
+		'store@store.com',
+		'www.store.com'
+	], align: 'center' },
 	{ type: 'empty' },
 	{ type: 'properties', lines: [
 		{ name: 'Order Number', value: 'XXXXXXXXXXXX' },
@@ -27,9 +29,7 @@ const output = receipt.create([
 		{ item: 'Product 7', qty: 3, cost: 500, discount: { type: 'absolute', value: 500, message: '3 for the price of 2' } }
 	] },
 	{ type: 'empty' },
-	{ type: 'center', value: 'Some extra information to' },
-	{ type: 'center', value: 'add to the footer of this' },
-	{ type: 'center', value: 'docket.' },
+	{ type: 'text', value: 'Some extra information to add to the footer of this docket.', align: 'center' },
 	{ type: 'empty' },
 	{ type: 'properties', lines: [
 		{ name: 'GST (10.00%)', value: 'AUD XX.XX' },
@@ -42,8 +42,7 @@ const output = receipt.create([
 		{ name: 'Amount Returned', value: 'AUD XX.XX' }
 	] },
 	{ type: 'empty' },
-	{ type: 'center', value: 'Final bits of text at the very' },
-	{ type: 'center', value: 'base of the docket.' }
+	{ type: 'text', value: 'Final bits of text at the very base of a docket. This text wraps around as well!', align: 'center', padding: 5 }
 ]);
 
 fs.writeFile('./example.txt', output, (err) => {

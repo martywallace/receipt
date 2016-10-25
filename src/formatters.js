@@ -12,16 +12,55 @@ module.exports = {
 		return utils.pad('', this.config.ruler, this.config.width, utils.PAD_RIGHT);
 	},
 
-	left(chunk) {
-		return chunk.value;
-	},
+	text(chunk) {
+		if (Array.isArray(chunk.value)) {
+			// Expand array to multiple text calls with same formatting.
+			return chunk.value.map((value) => {
+				return this.formatters.text({ type: chunk.type, value: value, align: chunk.align, padding: chunk.padding });
+			}).join(EOL);
+		}
 
-	right(chunk) {
-		return utils.pad(chunk.value, ' ', this.config.width, utils.PAD_LEFT);
-	},
+		let chars = this.config.width - (chunk.hasOwnProperty('padding') ? (chunk.hasOwnProperty('align') && chunk.align === 'center' ? chunk.padding * 2 : chunk.padding) : 0);
+		let words = chunk.value.split(/\s/g);
+		let lines = [];
+		let line = '';
 
-	center(chunk) {
-		return utils.pad(chunk.value, ' ', this.config.width, utils.PAD_BOTH);
+		words.reverse();
+
+		while (words.length > 0) {
+			let word = words.pop();
+
+			if (line.length + word.length > chars) {
+				lines.push(line);
+				line = '';
+			}
+
+			line += word + ' ';
+		}
+
+		lines.push(line);
+
+		let alignTypes = {
+			left: utils.PAD_RIGHT,
+			right: utils.PAD_LEFT,
+			center: utils.PAD_BOTH
+		};
+
+		if (lines) {
+			return lines.map((line) => {
+				line = line.replace(/\s+$|^\s+/, '');
+
+				if (chunk.hasOwnProperty('align')) {
+					if (alignTypes.hasOwnProperty(chunk.align)) {
+						return utils.pad(line, ' ', this.config.width, alignTypes[chunk.align]);
+					}
+				}
+
+				return utils.pad(line, ' ', this.config.width, utils.PAD_RIGHT);
+			}).join(EOL);
+		}
+
+		return '';
 	},
 
 	properties(chunk) {

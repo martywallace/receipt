@@ -1,3 +1,4 @@
-node_modules
 .DS_Store
-example.txt
+node_modules
+dist
+*.sandbox.js

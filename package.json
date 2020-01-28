@@ -1,16 +1,24 @@
 {
   "name": "receipt",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "Generate receipt-like output.",
-  "keywords": ["pos", "receipt", "kiosk", "printing", "formatting", "text", "currency"],
+  "keywords": [
+    "pos",
+    "receipt",
+    "kiosk",
+    "printing",
+    "formatting",
+    "text",
+    "currency"
+  ],
   "license": "MIT",
-  "author": {
-    "name": "Marty Wallace",
-    "email": "marty@martywallace.com",
-    "homepage": "https://martywallace.com"
+  "author": "Marty Wallace <marty@martywallace.com> (https://martywallace.com)",
+  "scripts": {
+    "build": "rm -rf dist && tsc"
   },
-  "main": "index.js",
-  "dependencies": {
-    "round-to": "^1.1.0"
+  "main": "dist/index.js",
+  "devDependencies": {
+    "@types/node": "^13.5.0",
+    "typescript": "^3.7.5"
   }
 }
